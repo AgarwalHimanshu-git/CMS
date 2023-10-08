@@ -1,0 +1,101 @@
+
+<div class="container">
+  <div [hidden]="isSubmitted">
+    <h1>Customer Form</h1>
+    <form (ngSubmit)="onSubmit()" #CustomerForm="ngForm">
+
+      <div class="form-group">
+        <label for="customerId">Customer Id</label>
+        <input type="text" class="form-control" id="customerId" placeholder=" Customer Id" required
+               [(ngModel)]="customer.id" #customerId = "ngModel" name="customerId">
+      </div>
+      <div [hidden]="customerId.valid || customerId.pristine"
+           class="alert alert-danger">
+        Id is required
+      </div>
+      <div class="form-group">
+        <label for="firstname">First Name</label>
+        <input type="text" class="form-control" id="firstname" placeholder=" First Name"
+               [(ngModel)]="customer.firstname" name="firstname">
+      </div>
+      <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input type="text" class="form-control" id="lastname" placeholder="Last Name"
+               [(ngModel)]="customer.lastname" name="lastname">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" email class="form-control" id="email" placeholder="Email"
+               required
+               [(ngModel)]="customer.email" name="email"
+               #email="ngModel">
+        <div [hidden]="email.valid || email.pristine"
+             class="alert alert-danger">
+          A valid email is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone_Number">Phone Number</label>
+        <input type="text" class="form-control" id="phone_Number"  placeholder="Please enter mobile number"
+               [(ngModel)]="customer.phone_Number" name="phone_Number">
+      </div>
+      <div class="form-group">
+        <label for="country_Code">Country Code</label>
+        <input type="text" class="form-control" id="country_Code" placeholder="Country Code"
+               [(ngModel)]="customer.country_Code" name="country_Code">
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select class="form-control" id="gender"
+                [(ngModel)]="customer.gender" name="gender"
+                #gender="ngModel">
+          <option *ngFor="let gender of Genders" [value]="gender">{{gender}}</option>
+        </select>
+
+      </div>
+      <div class="form-group">
+        <label for="balance">Balance</label>
+        <input type="text" class="form-control" id="balance" placeholder="Opening balance" (blur)="transformAmount($event)"
+               [(ngModel)]="customer.balance" name="balance">
+      </div>
+
+
+      <button type="submit" class="btn btn-success" [disabled]="!CustomerForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="clear(); CustomerForm.reset()">Clear</button>
+    </form>
+  </div>
+</div>
+<div [hidden]="!isSubmitted">
+  <h2>You submitted the following:</h2>
+  <div class="row">
+    <div class="col-xs-3">firstname</div>
+    <div class="col-xs-9">{{ customer.firstname }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">gender</div>
+    <div class="col-xs-9">{{ customer.gender }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">lastname</div>
+    <div class="col-xs-9">{{ customer.lastname }}</div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-3">email</div>
+    <div class="col-xs-9">{{ customer.email }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">country_Code</div>
+    <div class="col-xs-9">{{ customer.country_Code }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">balance</div>
+    <div class="col-xs-9">{{ customer.balance }}</div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-3">phone_Number</div>
+    <div class="col-xs-9">{{ customer.phone_Number }}</div>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="isSubmitted=false">Edit</button>
+</div>

@@ -1,0 +1,32 @@
+<h1 id="tableLabel">Customers</h1>
+
+<p *ngIf="!customers"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="customers">
+  <thead>
+    <tr>
+      <th>CustomerId</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+      <th>Phone_Number</th>
+      <th>Country_code</th>
+      <th>Gender</th>
+      <th>Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers">
+      <td>{{ customer.id }}</td>
+      <td>{{ customer.firstname }}</td>
+      <td>{{ customer.lastname }}</td>
+      <td><a href="https://mail.google.com/">{{ customer.email }}</a></td>
+      <td>{{ customer.phone_Number }}</td>
+      <td>{{ customer.country_Code }}</td>
+      <td>{{ customer.gender }}</td>
+      <td>{{ customer.balance }}</td>
+      <td><button [routerLink]="['/edit-customer',{id: customer.id}]">Edit</button></td>
+      <td><button (click)="DeleteCustomer(customer.id)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
