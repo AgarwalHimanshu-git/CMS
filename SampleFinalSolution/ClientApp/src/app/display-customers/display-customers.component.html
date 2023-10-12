@@ -20,7 +20,7 @@
       <td>{{ customer.id }}</td>
       <td>{{ customer.firstname }}</td>
       <td>{{ customer.lastname }}</td>
-      <td><a href="https://mail.google.com/">{{ customer.email }}</a></td>
+      <td><a [href]="getEmailString(customer)">{{ customer.email }}</a></td>
       <td>{{ customer.phone_Number }}</td>
       <td>{{ customer.country_Code }}</td>
       <td>{{ customer.gender }}</td>

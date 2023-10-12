@@ -23,6 +23,10 @@ export class DisplayCustomersComponent {
       }, error => console.error(error));
     }, error => console.error(error));
   }
+
+  public getEmailString(customer: Customer) {
+    return "mailto:" + customer.email;
+  }
 }
 
 
